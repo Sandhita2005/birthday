@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✨ Happy Birthday My Sweet Heart ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Pacifico&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background floating sparkles -->
+  <div class="sparkles" id="sparkles"></div>
+
+  <!-- Balloons -->
+  <div class="balloon" style="left: 8%;  animation-delay: 0s;">🎈</div>
+  <div class="balloon" style="left: 22%; animation-delay: 2s;">🎈</div>
+  <div class="balloon" style="left: 78%; animation-delay: 1s;">🎈</div>
+  <div class="balloon" style="left: 92%; animation-delay: 3s;">🎈</div>
+
+  <!-- Confetti canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Floating emojis -->
+  <div class="emoji-float" style="top: 15%; left: 8%; animation-duration: 11s;">🎈</div>
+  <div class="emoji-float" style="top: 70%; left: 85%; animation-duration: 9s; font-size: 2.8rem;">🎂</div>
+  <div class="emoji-float" style="top: 40%; left: 90%; animation-duration: 13s;">✨</div>
+  <div class="emoji-float" style="top: 80%; left: 12%; animation-duration: 10s; font-size: 2.5rem;">🎁</div>
+  <div class="emoji-float" style="top: 10%; left: 75%; animation-duration: 12s;">🎉</div>
+  <div class="emoji-float" style="top: 50%; left: 5%; animation-duration: 14s;">🥳</div>
+
+  <!-- Main Card -->
+  <div class="birthday-card">
+    <div class="card-inner">
+      <h1 class="birthday-title">Happy Birthday</h1>
+      <div class="name-highlight">
+        <span class="star">✨</span>
+        My Sweet Heart......
+        <span class="star">✨</span>
+      </div>
+      <p class="birthday-message">
+        May your day be filled with infinite joy, laughter, and all your favorite things.
+        You deserve the world and more! 🌟
+      </p>
+      <button class="btn-celebrate" id="celebrateBtn">
+        🎊 CELEBRATE 🎊
+      </button>
+      <div class="footer-note">
+        <span>❤️</span> click for confetti magic <span>❤️</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup Modal -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-content">
+      <button class="popup-close" id="popupClose">✕</button>
+      <div class="popup-image-wrapper">
+        <img src="sandhita.jpeg" alt="My Sweetheart" class="popup-image">
+        <div class="image-shine"></div>
+      </div>
+      <h2 class="popup-message">I Love You My Sweet Heart 💖</h2>
+      <p class="popup-subtext">Every moment with you feels like a celebration 🎉</p>
+      <div class="heart-rain">
+        <span>💖</span><span>💕</span><span>💗</span><span>❤️</span><span>💝</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
+    <!-- Optional: put song.mp3 in same folder, or use the URL below -->
+    <source src="song.mp3" type="audio/mpeg">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=happy-birthday-114476.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
