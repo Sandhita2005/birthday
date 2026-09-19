@@ -11,6 +11,19 @@
 </head>
 <body>
 
+  <!-- 🎁 START OVERLAY (first tap enables music) -->
+  <div class="start-overlay" id="startOverlay">
+    <div class="start-content">
+      <div class="start-heart">💖</div>
+      <h2 class="start-title">A Special Surprise</h2>
+      <p class="start-subtitle">for my sweet heart...</p>
+      <button class="start-btn" id="startBtn">
+        🎵 Tap to Begin 🎵
+      </button>
+      <p class="start-hint">✨ Happy Brthday To You ✨</p>
+    </div>
+  </div>
+
   <!-- Background floating sparkles -->
   <div class="sparkles" id="sparkles"></div>
 
@@ -71,9 +84,8 @@
 
   <!-- Background Music -->
   <audio id="bgMusic" loop>
-    <!-- Optional: put song.mp3 in same folder, or use the URL below -->
     <source src="song.mp3" type="audio/mpeg">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=happy-birthday-114476.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
   </audio>
 
   <script src="script.js"></script>

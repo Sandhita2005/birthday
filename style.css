@@ -29,7 +29,108 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Floating sparkles background */
+/* ============================================================
+   START OVERLAY (first tap)
+============================================================ */
+.start-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #3b1145, #0b0f1c 80%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.start-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.start-content {
+  text-align: center;
+  padding: 2rem;
+  animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.start-heart {
+  font-size: 5rem;
+  animation: heartbeat 1.4s infinite;
+  filter: drop-shadow(0 0 25px #ff4d6d);
+  margin-bottom: 0.5rem;
+}
+
+.start-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2rem, 8vw, 3rem);
+  color: #ffd966;
+  text-shadow:
+    0 0 15px #ff6f61,
+    0 0 35px #ffb347,
+    0 0 60px #ff4d6d;
+  margin-bottom: 0.4rem;
+  letter-spacing: 2px;
+}
+
+.start-subtitle {
+  color: #ffeede;
+  font-size: 1.15rem;
+  font-weight: 500;
+  opacity: 0.85;
+  margin-bottom: 2rem;
+}
+
+.start-btn {
+  background: linear-gradient(145deg, #fff2a8, #ffd966, #ffb347);
+  border: none;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  padding: 1.1rem 2.6rem;
+  border-radius: 60px;
+  color: #3b1145;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  box-shadow:
+    0 12px 0 #b1621a,
+    0 14px 30px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(255, 200, 100, 0.8);
+  transition: all 0.15s ease;
+  text-transform: uppercase;
+  animation: btnPulse 2s infinite;
+}
+
+.start-btn:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 15px 0 #b1621a,
+    0 18px 40px rgba(0, 0, 0, 0.55),
+    0 0 90px rgba(255, 111, 97, 1);
+}
+
+.start-btn:active {
+  transform: translateY(6px);
+  box-shadow: 0 6px 0 #b1621a, 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.start-hint {
+  margin-top: 1.6rem;
+  font-size: 0.95rem;
+  color: #ffd9c1;
+  opacity: 0.75;
+  letter-spacing: 2px;
+}
+
+/* ============================================================
+   BACKGROUND SPARKLES
+============================================================ */
 .sparkles {
   position: fixed;
   inset: 0;
@@ -52,7 +153,9 @@ body {
   50%      { opacity: 1;   transform: scale(1.4); }
 }
 
-/* Balloons floating */
+/* ============================================================
+   BALLOONS
+============================================================ */
 .balloon {
   position: fixed;
   bottom: -120px;
@@ -71,7 +174,9 @@ body {
   100% { transform: translateY(-120vh) rotate(15deg); opacity: 0; }
 }
 
-/* Main Card */
+/* ============================================================
+   MAIN CARD
+============================================================ */
 .birthday-card {
   position: relative;
   max-width: 720px;
@@ -445,7 +550,7 @@ body {
   margin-bottom: 1rem;
 }
 
-/* Heart rain inside popup */
+/* Heart rain */
 .heart-rain {
   display: flex;
   justify-content: center;

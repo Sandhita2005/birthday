@@ -120,34 +120,35 @@
   createSparkles();
 
   /* ============================================================
-     3. POPUP + MUSIC
+     3. ELEMENTS
   ============================================================ */
   const celebrateBtn = document.getElementById('celebrateBtn');
   const popupOverlay = document.getElementById('popupOverlay');
   const popupClose = document.getElementById('popupClose');
   const bgMusic = document.getElementById('bgMusic');
+  const startOverlay = document.getElementById('startOverlay');
+  const startBtn = document.getElementById('startBtn');
 
   let musicTimer = null;
 
+  /* ============================================================
+     4. MUSIC CONTROL (30 seconds)
+  ============================================================ */
   function playMusicFor30Seconds() {
     if (musicTimer) clearTimeout(musicTimer);
     bgMusic.currentTime = 0;
     bgMusic.volume = 0.7;
-    bgMusic.play().catch(err => console.log('Audio blocked:', err));
-
+    const p = bgMusic.play();
+    if (p !== undefined) {
+      p.catch(err => console.log('Audio blocked:', err));
+    }
     musicTimer = setTimeout(() => {
       bgMusic.pause();
       bgMusic.currentTime = 0;
     }, 30000);
   }
 
-  function openPopup() {
-    popupOverlay.classList.add('active');
-    playMusicFor30Seconds();
-  }
-
-  function closePopup() {
-    popupOverlay.classList.remove('active');
+  function stopMusic() {
     bgMusic.pause();
     bgMusic.currentTime = 0;
     if (musicTimer) {
@@ -157,14 +158,25 @@
   }
 
   /* ============================================================
-     4. CELEBRATE FUNCTION (extracted so we can call automatically)
+     5. POPUP OPEN / CLOSE
+  ============================================================ */
+  function openPopup() {
+    popupOverlay.classList.add('active');
+  }
+
+  function closePopup() {
+    popupOverlay.classList.remove('active');
+    stopMusic();
+  }
+
+  /* ============================================================
+     6. CELEBRATE FUNCTION → 🎵 music + confetti + popup
   ============================================================ */
   function triggerCelebration() {
     const rect = celebrateBtn.getBoundingClientRect();
     const originX = rect.left + rect.width / 2;
     const originY = rect.top + rect.height / 2;
 
-    // Multi-burst confetti
     createBurst(originX, originY, 70);
     setTimeout(() => {
       createBurst(window.innerWidth * 0.15, window.innerHeight * 0.25, 35);
@@ -180,28 +192,28 @@
     }, 260);
 
     startAnimation();
+
+    // 🎵 Play music on this real user click
+    playMusicFor30Seconds();
+
+    // Show popup with the photo
     openPopup();
 
-    // Button press feedback
     celebrateBtn.style.transform = 'scale(0.94)';
     setTimeout(() => { celebrateBtn.style.transform = ''; }, 130);
   }
 
-  // Manual click on button
   celebrateBtn.addEventListener('click', triggerCelebration);
 
   /* ============================================================
-     5. ⏰ AUTO-CLICK AFTER 5 SECONDS
+     7. START OVERLAY → just hides, no music
   ============================================================ */
-  setTimeout(() => {
-    // Only auto-trigger if the popup isn't already open
-    if (!popupOverlay.classList.contains('active')) {
-      triggerCelebration();
-    }
-  }, 5000); // 5000 ms = 5 seconds
+  startBtn.addEventListener('click', () => {
+    startOverlay.classList.add('hidden');
+  });
 
   /* ============================================================
-     6. PAGE LOAD MINI CELEBRATION
+     8. PAGE LOAD MINI CELEBRATION
   ============================================================ */
   window.addEventListener('load', () => {
     setTimeout(() => {
@@ -213,7 +225,7 @@
   });
 
   /* ============================================================
-     7. POPUP CLOSE
+     9. POPUP CLOSE EVENTS
   ============================================================ */
   popupClose.addEventListener('click', closePopup);
   popupOverlay.addEventListener('click', (e) => {
