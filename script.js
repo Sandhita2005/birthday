@@ -132,16 +132,19 @@
   let musicTimer = null;
 
   /* ============================================================
-     4. MUSIC CONTROL (30 seconds)
+     4. MUSIC (called synchronously inside click handler)
   ============================================================ */
   function playMusicFor30Seconds() {
     if (musicTimer) clearTimeout(musicTimer);
     bgMusic.currentTime = 0;
     bgMusic.volume = 0.7;
+
+    // ⚡ play() called directly in the click event stack
     const p = bgMusic.play();
     if (p !== undefined) {
       p.catch(err => console.log('Audio blocked:', err));
     }
+
     musicTimer = setTimeout(() => {
       bgMusic.pause();
       bgMusic.currentTime = 0;
@@ -170,9 +173,12 @@
   }
 
   /* ============================================================
-     6. CELEBRATE FUNCTION → 🎵 music + confetti + popup
+     6. CELEBRATE — music plays FIRST, synchronously
   ============================================================ */
   function triggerCelebration() {
+    // 🎵 CALLED FIRST — must be in the same tick as the click
+    playMusicFor30Seconds();
+
     const rect = celebrateBtn.getBoundingClientRect();
     const originX = rect.left + rect.width / 2;
     const originY = rect.top + rect.height / 2;
@@ -192,11 +198,6 @@
     }, 260);
 
     startAnimation();
-
-    // 🎵 Play music on this real user click
-    playMusicFor30Seconds();
-
-    // Show popup with the photo
     openPopup();
 
     celebrateBtn.style.transform = 'scale(0.94)';
@@ -206,7 +207,7 @@
   celebrateBtn.addEventListener('click', triggerCelebration);
 
   /* ============================================================
-     7. START OVERLAY → just hides, no music
+     7. START OVERLAY — just hide it, no music
   ============================================================ */
   startBtn.addEventListener('click', () => {
     startOverlay.classList.add('hidden');
